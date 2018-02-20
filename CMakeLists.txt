@@ -11,7 +11,7 @@ file(GLOB_RECURSE SOURCE_FILES
         "src/*.h"
         )
 
-add_executable(SDL-JUMP ${SOURCE_FILES})
+add_executable(SDL-JUMP ${SOURCE_FILES} src/entity/Entity.h)
 
 target_link_libraries(SDL-JUMP SDL2-static SDL2main)
 

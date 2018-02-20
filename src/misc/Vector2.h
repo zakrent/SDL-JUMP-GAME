@@ -26,6 +26,7 @@ public:
     void operator*=(long double mul);
 
     Vector2(long double x, long double y);
+    Vector2();
 
     ~Vector2();
 };

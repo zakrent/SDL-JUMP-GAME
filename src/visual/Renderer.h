@@ -11,10 +11,14 @@
 class Renderer {
     SDL_Window* window;
     SDL_Renderer* renderer;
-    SDL_Rect camera;
 
 public:
+    Vector2 camera;
     void createWindow();
+    int convertToPixCord(double cord);
+
+    void renderRectangle(Vector2 root, double width, double height);
+    void renderCirlce(Vector2 root, double radius);
 
     void startRendering();
     void swapBuffers();

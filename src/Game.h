@@ -8,6 +8,7 @@
 #include <SDL.h>
 #include "misc/SettingsManager.h"
 #include "visual/Renderer.h"
+#include "world/World.h"
 
 class Game {
     static Game* sInstance;
@@ -15,6 +16,7 @@ class Game {
     ~Game();
 public:
     SettingsManager* settingsManager;
+    World* world;
     Renderer* renderer;
 
     void startMainLoop();

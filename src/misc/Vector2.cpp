@@ -46,3 +46,8 @@ void Vector2::operator*=(long double mul) {
     this->y *= mul;
 }
 
+Vector2::Vector2() {
+    x = 0;
+    y = 0;
+}
+

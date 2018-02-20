@@ -7,6 +7,7 @@
 SettingsManager::SettingsManager() {
     setSetting("resx", 600);
     setSetting("resy", 400);
+    setSetting("upixsize", 32);
 }
 
 bool SettingsManager::checkIfSettingExists(std::string key) {

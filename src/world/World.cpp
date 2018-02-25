@@ -15,7 +15,12 @@ void World::update() {
     for(std::unique_ptr<Entity>& entity : entities){
         entity->update();
     }
+}
 
+void World::handleCollisions() {
+    for(std::unique_ptr<Entity>& entity : entities){
+        entity->handleCollisions();
+    }
 }
 
 void World::render() {
@@ -52,3 +57,4 @@ void World::generateMap() {
         tiles.push_back(tempVector);
     }
 }
+

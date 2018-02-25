@@ -12,14 +12,18 @@ void Game::startMainLoop() {
     bool running = true;
     const int MIN_UPDATE_TIME = 10;
     int updateStart;
+
+    world->entities.push_back(std::make_unique<Entity>(Vector2(4.5,4)));
+
     while(running) {
         updateStart = SDL_GetTicks();
 
         world->update();
+        collisionSystem->checkForCollisions();
+        world->handleCollisions();
 
         renderer->startRendering();
         world->render();
-        renderer->renderCirlce(Vector2(4,4), 0.5);
         renderer->swapBuffers();
 
         SDL_Event event{};
@@ -52,6 +56,7 @@ Game::Game() {
     settingsManager = new SettingsManager;
     world = new World;
     renderer = new Renderer;
+    collisionSystem = new CollisionSystem;
 }
 
 Game::~Game() {

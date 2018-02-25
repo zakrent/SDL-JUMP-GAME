@@ -18,6 +18,7 @@ public:
     SettingsManager* settingsManager;
     World* world;
     Renderer* renderer;
+    CollisionSystem* collisionSystem;
 
     void startMainLoop();
     static Game* get();

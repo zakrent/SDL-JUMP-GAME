@@ -56,7 +56,7 @@ void Renderer::renderRectangle(Vector2 root, double width, double height) {
     rect.w = convertToPixCord(width);
     rect.h = convertToPixCord(height);
 
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderFillRect(renderer, &rect);
 }
 
@@ -68,6 +68,7 @@ void Renderer::renderCirlce(Vector2 root, double radius) {
         points[i].x += static_cast<int>(cos(i * M_PI / 180)*convertToPixCord(radius));
         points[i].y += static_cast<int>(sin(i * M_PI / 180)*convertToPixCord(radius));
     }
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderDrawLines(renderer, points, 360);
 }
 

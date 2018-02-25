@@ -23,7 +23,7 @@ struct CollisionData{
 class CollisionSystem {
     bool checkForAABBCircleCollision(Vector2 AABBRoot, int AABBW, int AABBH, Vector2 CircleRootPos, double radius);
 public:
-
+    void checkForCollisions();
 };
 
 

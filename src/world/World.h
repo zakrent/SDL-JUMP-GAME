@@ -20,6 +20,7 @@ public:
     Vector2 mapRoot;
 
     void update();
+    void handleCollisions();
 
     void render();
     void generateMap();

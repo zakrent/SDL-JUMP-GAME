@@ -14,4 +14,8 @@ bool InputManager::isInputPressed(std::string input) {
 
 InputManager::InputManager() {
     state = SDL_GetKeyboardState(NULL);
+    registerInput("Jump", SDL_SCANCODE_W);
+    registerInput("Right", SDL_SCANCODE_D);
+    registerInput("Left", SDL_SCANCODE_A);
+    registerInput("Stop", SDL_SCANCODE_S);
 }

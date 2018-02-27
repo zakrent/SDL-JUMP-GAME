@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "Game.h"
+#include "entity/Player.h"
 
 Game* Game::sInstance = nullptr;
 
@@ -13,7 +14,7 @@ void Game::startMainLoop() {
     const int MIN_UPDATE_TIME = 10;
     int updateStart;
 
-    world->entities.push_back(std::make_unique<Entity>(Vector2(4.5,4)));
+    world->entities.push_back(std::make_unique<Player>(Vector2(4.5,4)));
 
     while(running) {
         updateStart = SDL_GetTicks();
@@ -54,9 +55,11 @@ Game::Game() {
     SDL_Init(SDL_INIT_EVERYTHING);
 
     settingsManager = new SettingsManager;
+    inputManager = new InputManager;
     world = new World;
     renderer = new Renderer;
     collisionSystem = new CollisionSystem;
+    scoreManager = new ScoreManager;
 }
 
 Game::~Game() {

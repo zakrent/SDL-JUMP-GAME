@@ -15,13 +15,23 @@ void Entity::registerCollision(const CollisionData& data) {
     col += data.collisionVector;
 }
 
-void Entity::update() {
+void Entity::updatePhysics() {
     vel += Vector2(0, 0.0015);
+    if(currentState == entityState::STATE_GROUND){
+        vel *= 0.9;
+    }
     pos+=vel;
+}
+
+void Entity::update() {
+    updatePhysics();
 }
 
 void Entity::handleCollisions() {
     if(!(col == Vector2())) {
+        if(currentState == entityState::STATE_AIR){
+            currentState = entityState::STATE_GROUND;
+        }
         col *= 1.0/numberOfCollisions;
         double colAngle = asin(static_cast<double>(col.y / col.length())) * 180 / M_PI;
         if(colAngle < 0){
@@ -39,6 +49,9 @@ void Entity::handleCollisions() {
             vel = Vector2();
         }
         pos += intersectionVec;
+    }
+    else if(currentState == entityState::STATE_GROUND){
+        currentState = entityState::STATE_AIR;
     }
     numberOfCollisions = 0;
     col = Vector2();

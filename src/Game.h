@@ -9,6 +9,8 @@
 #include "misc/SettingsManager.h"
 #include "visual/Renderer.h"
 #include "world/World.h"
+#include "misc/InputManager.h"
+#include "misc/ScoreManager.h"
 
 class Game {
     static Game* sInstance;
@@ -16,9 +18,11 @@ class Game {
     ~Game();
 public:
     SettingsManager* settingsManager;
+    InputManager* inputManager;
     World* world;
     Renderer* renderer;
     CollisionSystem* collisionSystem;
+    ScoreManager* scoreManager;
 
     void startMainLoop();
     static Game* get();

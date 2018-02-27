@@ -16,6 +16,7 @@ public:
     Vector2 camera;
     void createWindow();
     int convertToPixCord(double cord);
+    double convertToWorldCord(int cord);
 
     void renderRectangle(Vector2 root, double width, double height);
     void renderCirlce(Vector2 root, double radius);

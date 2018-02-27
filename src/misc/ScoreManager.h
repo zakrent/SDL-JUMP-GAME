@@ -9,6 +9,7 @@
 class ScoreManager {
     double currentScore;
 public:
+    void restart();
     void registerScore(double xPos);
     double getCurrentScore();
     ScoreManager();

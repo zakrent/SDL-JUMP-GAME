@@ -8,11 +8,13 @@
 #include "Entity.h"
 
 class Player : public Entity {
+    Vector2 startPos;
+    void restart();
 public:
     void update() override;
 
     Player() = default;
-    explicit Player(const Vector2 &pos) : Entity(pos) {}
+    explicit Player(const Vector2 &pos) : Entity(pos), startPos(pos) {}
 };
 
 

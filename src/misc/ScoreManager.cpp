@@ -18,3 +18,7 @@ double ScoreManager::getCurrentScore() {
 ScoreManager::ScoreManager() {
     currentScore = 0;
 }
+
+void ScoreManager::restart() {
+    currentScore = 0;
+}

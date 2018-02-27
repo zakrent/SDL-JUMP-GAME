@@ -26,4 +26,13 @@ void Player::update() {
             vel.x *= 0.5;
         }
     }
+    if(pos.y > 20){
+        restart();
+    }
+}
+
+void Player::restart() {
+    pos = startPos;
+    vel = Vector2();
+    Game::get()->scoreManager->restart();
 }

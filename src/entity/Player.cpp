@@ -20,10 +20,10 @@ void Player::update() {
             vel.x = -0.045;
         }
         if(inputManager->isInputPressed("Jump")){
-            vel.y = -0.08;
+            vel.y = -0.10;
         }
         if(inputManager->isInputPressed("Stop")){
-            vel.x *= 0.5;
+            vel.x = 0;
         }
     }
     if(pos.y > 20){

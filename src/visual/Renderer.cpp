@@ -72,7 +72,7 @@ void Renderer::renderRectangle(Vector2 root, double width, double height) {
     if((int)root.x % 2 == 0)
         SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     else
-        SDL_SetRenderDrawColor(renderer, 255, 0, 255, 255);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
     SDL_RenderFillRect(renderer, &rect);
 }
 

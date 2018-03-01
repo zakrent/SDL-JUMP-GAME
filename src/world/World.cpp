@@ -47,7 +47,7 @@ void World::generateMap() {
     for (int j = 0; j < 50; j++) {
         std::vector<Tile> tempVector;
         for (int i = 0; i < 8; i++) {
-            if(i == 7){
+            if(i == 7 || (j > 10 && i ==4)){
                 tempVector.push_back(Tile::WALL);
             }
             else{

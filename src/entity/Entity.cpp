@@ -29,9 +29,6 @@ void Entity::update() {
 
 void Entity::handleCollisions() {
     if(!(col == Vector2())) {
-        if(currentState == entityState::STATE_AIR){
-            currentState = entityState::STATE_GROUND;
-        }
         col *= 1.0/numberOfCollisions;
         double colAngle = asin(static_cast<double>(col.y / col.length())) * 180 / M_PI;
         if(colAngle < 0){
@@ -40,15 +37,20 @@ void Entity::handleCollisions() {
         Vector2 intersectionVec = Vector2();
         if ((colAngle >= 35 && colAngle <= 145) || (colAngle > 215 && colAngle < 325)) {
             vel.y *= -1*BOUNCE_EFF;
-            intersectionVec.y = -0.5-col.y-radius;
+            intersectionVec.y -= col.y;
+            intersectionVec.y += (col.y/abs(col.y))*(0.5+radius);
         } else {
             vel.x *= -1*BOUNCE_EFF;
-            intersectionVec.x = -0.5-col.x-radius;
+            intersectionVec.x -= col.x;
+            intersectionVec.x += (col.x/abs(col.x))*(0.5+radius);
         }
         if(vel.length() < 0.012){
             vel = Vector2();
         }
         pos += intersectionVec;
+        if(currentState == entityState::STATE_AIR && intersectionVec.y < 0){
+            currentState = entityState::STATE_GROUND;
+        }
     }
     else if(currentState == entityState::STATE_GROUND){
         currentState = entityState::STATE_AIR;

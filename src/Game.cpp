@@ -14,7 +14,7 @@ void Game::startMainLoop() {
     const int MIN_UPDATE_TIME = 10;
     int updateStart;
 
-    world->entities.push_back(std::make_unique<Player>(Vector2(4.5,4)));
+    world->entities.push_back(std::make_unique<Player>(Vector2(0,5)));
 
     while(running) {
         updateStart = SDL_GetTicks();

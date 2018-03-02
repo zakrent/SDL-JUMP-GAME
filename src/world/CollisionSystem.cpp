@@ -28,12 +28,12 @@ void CollisionSystem::checkForCollisions() {
     for (auto &tile : *tiles) {
         int i = 0;
         for (auto &curTile : tile) {
-            if(curTile==Tile::WALL){
+            if(curTile==Tile::WALL || curTile==Tile::SPIKE){
                 Vector2 AABBRoot = mapRoot + Vector2(j,i);
                 for(auto& entity : *entities){
                     if(checkForAABBCircleCollision(AABBRoot, 1, 1, entity->pos, entity->radius)){
                         Vector2 colVec = entity->pos - AABBRoot - Vector2(0.5,0.5);
-                        CollisionData colDat = CollisionData{CollisionType::WORLD, colVec, Tile::WALL};
+                        CollisionData colDat = CollisionData{CollisionType::WORLD, colVec, curTile};
                         entity->registerCollision(colDat);
                     }
                 }

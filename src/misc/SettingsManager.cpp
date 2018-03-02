@@ -5,7 +5,7 @@
 #include "SettingsManager.h"
 
 SettingsManager::SettingsManager() {
-    setSetting("resx", 600);
+    setSetting("resx", 800);
     setSetting("resy", 400);
     setSetting("upixsize", 32);
 }

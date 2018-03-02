@@ -23,7 +23,7 @@ void Player::update() {
             vel.y = -0.10;
         }
         if(inputManager->isInputPressed("Stop")){
-            vel.x = 0;
+            vel.y = 0;
         }
     }
     if(pos.y > 20){
@@ -35,4 +35,11 @@ void Player::restart() {
     pos = startPos;
     vel = Vector2();
     Game::get()->scoreManager->restart();
+}
+
+void Player::registerCollision(const CollisionData &data) {
+    if(data.type == CollisionType::WORLD && data.tileType == Tile::SPIKE){
+        restart();
+    }
+    Entity::registerCollision(data);
 }

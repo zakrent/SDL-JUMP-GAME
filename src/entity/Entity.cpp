@@ -18,7 +18,7 @@ void Entity::registerCollision(const CollisionData& data) {
 void Entity::updatePhysics() {
     vel += Vector2(0, 0.0015);
     if(currentState == entityState::STATE_GROUND){
-        vel *= 0.9;
+        vel.x *= 0.8;
     }
     pos+=vel;
 }

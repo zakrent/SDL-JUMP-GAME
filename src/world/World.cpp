@@ -2,13 +2,59 @@
 // Created by zakrent on 2/19/18.
 //
 
+#include <iostream>
 #include "World.h"
 #include "../visual/Renderer.h"
 #include "../Game.h"
 
 World::World() {
-    mapRoot = Vector2(0,3);
+    seed = 240;
+    mapRoot = Vector2(-25,3);
     generateMap();
+}
+
+int World::getBlockSeed(int blockId){
+    return abs((blockId*1299811*seed)%1000);
+}
+
+std::vector<Tile> World::generateColumn(int x){
+    std::vector<Tile> retVec;
+    int columnId = x/4;
+    int blockId = abs(x)%4;
+    int blockSeed = getBlockSeed(columnId);
+    bool hole = blockSeed < 400  && (blockId == 2 || blockId == 1);
+    bool spikes = (blockSeed > 400 && blockSeed < 800) && !hole && blockId != 0;
+    bool upperLevel = blockSeed < 800 && blockSeed > 350 && 0x8&blockSeed;
+    bool upperSpikes = upperLevel && (blockSeed < 400 || blockSeed > 750);
+
+    for (int i = 0; i < 8; i++) {
+        if((i == 7 && !hole) || (upperLevel && i == 4)){
+            retVec.push_back(Tile::WALL);
+        }
+        else if(spikes && i==6){
+            retVec.push_back(Tile::SPIKE);
+        }
+        else{
+            retVec.push_back(Tile::AIR);
+        }
+    }
+    return retVec;
+}
+
+void World::shiftMap(int centerX){
+    Vector2 newRoot = Vector2(centerX-25, 3);
+    int deltaX = newRoot.x - mapRoot.x;
+    for(int i = 0; i < abs(deltaX); i++){
+        if(deltaX > 0) {
+            tiles.pop_front();
+            tiles.push_back(generateColumn(mapRoot.x+25+i));
+        }
+        else{
+            tiles.pop_back();
+            tiles.push_front(generateColumn(mapRoot.x-26-i));
+        }
+    }
+    mapRoot = newRoot;
 }
 
 void World::update() {
@@ -37,6 +83,9 @@ void World::render() {
             if(curTile==Tile::WALL){
                 renderer->renderRectangle(mapRoot+Vector2(j,i), 1, 1);
             }
+            else if(curTile==Tile::SPIKE){
+                renderer->renderTriangle(mapRoot+Vector2(j,i+1), mapRoot+Vector2(j+1,i+1), mapRoot+Vector2(j+0.5,i));
+            }
             i++;
         }
         j++;
@@ -44,17 +93,8 @@ void World::render() {
 }
 
 void World::generateMap() {
-    for (int j = 0; j < 50; j++) {
-        std::vector<Tile> tempVector;
-        for (int i = 0; i < 8; i++) {
-            if(i == 7 || (j > 10 && i ==4)){
-                tempVector.push_back(Tile::WALL);
-            }
-            else{
-                tempVector.push_back(Tile::AIR);
-            }
-        }
-        tiles.push_back(tempVector);
+    for (int j = -25; j < 25; j++) {
+        tiles.push_back(generateColumn(mapRoot.x+j));
     }
 }
 

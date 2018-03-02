@@ -19,6 +19,8 @@ void Game::startMainLoop() {
     while(running) {
         updateStart = SDL_GetTicks();
 
+	world->shiftMap(world->entities.front()->pos.x);
+
         world->update();
         collisionSystem->checkForCollisions();
         world->handleCollisions();

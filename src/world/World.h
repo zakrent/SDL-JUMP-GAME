@@ -14,6 +14,9 @@
 #include "Tile.h"
 
 class World {
+    int seed;
+    int getBlockSeed(int blockId);
+    std::vector<Tile> generateColumn(int x);
 public:
     std::list<std::unique_ptr<Entity>> entities;
     std::list<std::vector<Tile>> tiles;
@@ -21,6 +24,7 @@ public:
 
     void update();
     void handleCollisions();
+    void shiftMap(int centerX);
 
     void render();
     void generateMap();

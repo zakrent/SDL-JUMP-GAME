@@ -12,6 +12,7 @@ class Player : public Entity {
     void restart();
 public:
     void update() override;
+    void registerCollision(const CollisionData& data) override;
 
     Player() = default;
     explicit Player(const Vector2 &pos) : Entity(pos), startPos(pos) {}

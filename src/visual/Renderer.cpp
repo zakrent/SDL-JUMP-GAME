@@ -16,7 +16,6 @@ Renderer::~Renderer() {
 
 void Renderer::createWindow() {
     Game* game = Game::get();
-
     if(!game->settingsManager->checkIfSettingExists("resx") || !game->settingsManager->checkIfSettingExists("resy")){
         perror("Failed to load resolution settings!\n");
         exit(-1);
@@ -87,5 +86,18 @@ void Renderer::renderCirlce(Vector2 root, double radius) {
     }
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderDrawLines(renderer, points, 360);
+}
+
+void Renderer::renderTriangle(Vector2 x1, Vector2 x2, Vector2 x3) {
+    SDL_Point points[4];
+    x1 -= camera;
+    x2 -= camera;
+    x3 -= camera;
+    points[0] = SDL_Point{convertToPixCord(static_cast<double>(x1.x)), convertToPixCord(static_cast<double>(x1.y))};
+    points[1] = SDL_Point{convertToPixCord(static_cast<double>(x2.x)), convertToPixCord(static_cast<double>(x2.y))};
+    points[2] = SDL_Point{convertToPixCord(static_cast<double>(x3.x)), convertToPixCord(static_cast<double>(x3.y))};
+    points[3] = points[0];
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_RenderDrawLines(renderer, points, 4);
 }
 

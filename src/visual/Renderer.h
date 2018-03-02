@@ -20,6 +20,7 @@ public:
 
     void renderRectangle(Vector2 root, double width, double height);
     void renderCirlce(Vector2 root, double radius);
+    void renderTriangle(Vector2 x1, Vector2 x2, Vector2 x3);
 
     void startRendering();
     void swapBuffers();

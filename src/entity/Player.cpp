@@ -34,6 +34,7 @@ void Player::update() {
 void Player::restart() {
     pos = startPos;
     vel = Vector2();
+    currentState = entityState::STATE_AIR;
     Game::get()->scoreManager->restart();
 }
 

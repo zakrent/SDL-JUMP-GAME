@@ -6,11 +6,14 @@
 #define SDL_JUMP_RENDERER_H
 
 #include <SDL.h>
+#include <string>
 #include "../misc/Vector2.h"
+#include "TextureWrapper.h"
 
 class Renderer {
     SDL_Window* window;
     SDL_Renderer* renderer;
+    TextureWrapper* fontTexture;
 
 public:
     Vector2 camera;
@@ -21,6 +24,8 @@ public:
     void renderRectangle(Vector2 root, double width, double height);
     void renderCirlce(Vector2 root, double radius);
     void renderTriangle(Vector2 x1, Vector2 x2, Vector2 x3);
+    void renderChar(char c, Vector2 pos, int offset);
+    void renderString(std::string s, Vector2 pos);
 
     void startRendering();
     void swapBuffers();

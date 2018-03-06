@@ -28,6 +28,7 @@ void Renderer::createWindow() {
         perror("Failed to create window!\n");
         exit(-1);
     }
+    fontTexture = new TextureWrapper(renderer, const_cast<char *>("textures/font.bmp"));
 }
 
 void Renderer::startRendering() {
@@ -99,5 +100,26 @@ void Renderer::renderTriangle(Vector2 x1, Vector2 x2, Vector2 x3) {
     points[3] = points[0];
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
     SDL_RenderDrawLines(renderer, points, 4);
+}
+
+void Renderer::renderChar(char c, Vector2 pos, int offset=0) {
+    if(c < 'a') {
+        c -= 1;
+    }
+    int xFontPos = ((c%16))*32;
+    int yFontPos = (c/16)*32;
+    SDL_Rect srcrect{xFontPos, yFontPos, 32, 32};
+    SDL_Rect dstrect{convertToPixCord((double)pos.x)+offset*16,
+                     convertToPixCord((double)pos.y), 16, 16};
+    SDL_RenderCopyEx(renderer, fontTexture->getTexturePointer(), &srcrect,
+                     &dstrect, 0, nullptr, SDL_FLIP_NONE);
+}
+
+void Renderer::renderString(std::string s, Vector2 pos) {
+    int i = 0;
+    for(auto c : s){
+        renderChar(c, pos, i);
+        i++;
+    }
 }
 

@@ -11,18 +11,31 @@ void Player::update() {
     updatePhysics();
     Game::get()->renderer->camera.x=pos.x;
     Game::get()->scoreManager->registerScore(static_cast<double>(pos.x));
-    if(currentState == entityState::STATE_GROUND){
-        InputManager* inputManager = Game::get()->inputManager;
-        if(inputManager->isInputPressed("Right")){
+    InputManager* inputManager = Game::get()->inputManager;
+    if(inputManager->isInputPressed("Right")){
+        if(currentState == entityState::STATE_GROUND){
             vel.x = 0.045;
         }
-        if(inputManager->isInputPressed("Left")){
+        else if(vel.x < 0.045){
+            vel.x += 0.0005;
+        }
+    }
+    if(inputManager->isInputPressed("Left")){
+        if(currentState == entityState::STATE_GROUND){
             vel.x = -0.045;
         }
-        if(inputManager->isInputPressed("Jump")){
+        else if(vel.x > -0.045){
+            vel.x -= 0.0005;
+        }
+    }
+    if(inputManager->isInputPressed("Jump")){
+        if(currentState == entityState::STATE_GROUND){
             vel.y = -0.10;
         }
-        if(inputManager->isInputPressed("Stop")){
+    }
+    if(inputManager->isInputPressed("Stop")){
+        if(currentState == entityState::STATE_GROUND){
+            vel.x = 0;
             vel.y = 0;
         }
     }

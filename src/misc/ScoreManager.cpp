@@ -10,6 +10,9 @@ void ScoreManager::registerScore(double xPos) {
     if(givenScore > currentScore){
         currentScore = givenScore;
     }
+    if(currentScore > highScore){
+        highScore = currentScore;
+    }
 }
 
 double ScoreManager::getCurrentScore() {
@@ -18,8 +21,13 @@ double ScoreManager::getCurrentScore() {
 
 ScoreManager::ScoreManager() {
     currentScore = 0;
+    highScore = 0;
 }
 
 void ScoreManager::restart() {
     currentScore = 0;
+}
+
+double ScoreManager::getHighScore() {
+    return highScore;
 }

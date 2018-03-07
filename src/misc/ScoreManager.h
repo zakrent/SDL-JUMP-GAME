@@ -8,10 +8,12 @@
 
 class ScoreManager {
     double currentScore;
+    double highScore;
 public:
     void restart();
     void registerScore(double xPos);
     double getCurrentScore();
+    double getHighScore();
     ScoreManager();
 };
 

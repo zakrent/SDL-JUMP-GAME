@@ -23,7 +23,8 @@ std::vector<Tile> World::generateColumn(int x){
     int blockId = abs(x)%4;
     int blockSeed = getBlockSeed(columnId);
     bool hole = blockSeed < 400  && (blockId == 2 || blockId == 1);
-    bool spikes = (blockSeed > 400 && blockSeed < 800) && !hole && blockId != 0;
+    bool spikes = (blockSeed > 400 && blockSeed < 800) && !hole && blockId != 0
+                  && (blockId != 3 || blockSeed < 600);
     bool upperLevel = blockSeed < 800 && blockSeed > 350 && 0x8&blockSeed;
     bool upperSpikes = upperLevel && (blockSeed < 400 || blockSeed > 750);
 

@@ -26,8 +26,8 @@ void Game::startMainLoop() {
         world->handleCollisions();
 
         renderer->startRendering();
-        std::string infoString = "Current score: "+std::to_string(scoreManager->getCurrentScore())+
-                " High score: "+std::to_string(scoreManager->getHighScore());
+        std::string infoString = "High score:    "+std::to_string(scoreManager->getHighScore())+
+                "\nCurrent score: "+std::to_string(scoreManager->getCurrentScore());
         renderer->renderString(infoString, Vector2(0,0));
         world->render();
         renderer->swapBuffers();

@@ -102,24 +102,32 @@ void Renderer::renderTriangle(Vector2 x1, Vector2 x2, Vector2 x3) {
     SDL_RenderDrawLines(renderer, points, 4);
 }
 
-void Renderer::renderChar(char c, Vector2 pos, int offset=0) {
+void Renderer::renderChar(char c, int x, int y) {
     if(c < 'a') {
         c -= 1;
     }
     int xFontPos = ((c%16))*32;
     int yFontPos = (c/16)*32;
     SDL_Rect srcrect{xFontPos, yFontPos, 32, 32};
-    SDL_Rect dstrect{convertToPixCord((double)pos.x)+offset*16,
-                     convertToPixCord((double)pos.y), 16, 16};
+    SDL_Rect dstrect{x, y, 16, 16};
     SDL_RenderCopyEx(renderer, fontTexture->getTexturePointer(), &srcrect,
                      &dstrect, 0, nullptr, SDL_FLIP_NONE);
 }
 
 void Renderer::renderString(std::string s, Vector2 pos) {
+    int x = convertToPixCord((double)pos.x);
+    int y = convertToPixCord((double)pos.y);
     int i = 0;
-    for(auto c : s){
-        renderChar(c, pos, i);
-        i++;
+    int j = 0;
+    for(char c : s){
+        if(c == '\n'){
+            j++;
+            i = 0;
+        }
+        else {
+            renderChar(c, x + i*16, y + j*16);
+            i++;
+        }
     }
 }
 

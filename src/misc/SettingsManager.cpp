@@ -3,11 +3,13 @@
 //
 
 #include "SettingsManager.h"
+#include "FileParser.h"
 
 SettingsManager::SettingsManager() {
-    setSetting("resx", 800);
+    /*setSetting("resx", 800);
     setSetting("resy", 400);
-    setSetting("upixsize", 32);
+    setSetting("upixsize", 32);*/
+    loadFromFile();
 }
 
 bool SettingsManager::checkIfSettingExists(std::string key) {
@@ -20,5 +22,11 @@ int SettingsManager::getSetting(std::string key) {
 
 void SettingsManager::setSetting(std::string key, int value) {
     settings[key] = value;
+}
+
+void SettingsManager::loadFromFile() {
+    std::string filename = "settings.dat";
+    FileParser fileParser(filename);
+    settings = fileParser.data;
 }
 

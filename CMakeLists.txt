@@ -18,4 +18,5 @@ target_link_libraries(SDL-JUMP SDL2-static SDL2main)
 include_directories(${SDL2_SOURCE_DIR}/include)
 
 file(COPY textures/ DESTINATION bin/textures/)
+file(COPY data/ DESTINATION bin/)
 

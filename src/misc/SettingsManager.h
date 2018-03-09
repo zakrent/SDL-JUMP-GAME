@@ -11,7 +11,7 @@
 class SettingsManager {
     std::map<std::string, int> settings;
 public:
-// void loadFromFile();
+    void loadFromFile();
     bool checkIfSettingExists(std::string key);
     int getSetting(std::string key);
     void setSetting(std::string key, int value);

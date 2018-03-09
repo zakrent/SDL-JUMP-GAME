@@ -15,7 +15,7 @@ class FileParser {
     void parseFile();
 
 public:
-    std::map<std::string, int> data;
+    std::map<std::string, std::string> data;
 
     explicit FileParser(std::string filename);
     ~FileParser();

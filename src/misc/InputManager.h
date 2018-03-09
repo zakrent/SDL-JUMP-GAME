@@ -13,6 +13,7 @@ class InputManager {
     std::map<std::string, SDL_Scancode> inputs;
     const Uint8* state;
 public:
+    void loadFromFile();
     bool isInputPressed(std::string input);
     void registerInput(std::string name, SDL_Scancode scancode);
 

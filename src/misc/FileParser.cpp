@@ -15,7 +15,7 @@ FileParser::~FileParser() {
 void FileParser::parseFile() {
     file.open(filename);
     std::string key;
-    int value = 0;
+    std::string value;
     while(!file.eof()){
         file>>key;
         file>>value;

@@ -27,6 +27,8 @@ void SettingsManager::setSetting(std::string key, int value) {
 void SettingsManager::loadFromFile() {
     std::string filename = "settings.dat";
     FileParser fileParser(filename);
-    settings = fileParser.data;
+    for(const auto &element : fileParser.data){
+        setSetting(element.first, std::stoi(element.second));
+    }
 }
 
